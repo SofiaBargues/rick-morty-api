@@ -22,7 +22,7 @@ const Home = () => {
 
   const searchCharacters = () => {
     if (searchTermCharacters) {
-      const searchResults = characters.filter((character) =>
+      const searchResults = initData.filter((character) =>
         character.name
           .toLowerCase()
           .includes(searchTermCharacters.toLowerCase())
@@ -59,7 +59,7 @@ const Home = () => {
   };
 
   return (
-    <section>
+    <section className="container mx-auto">
       <Header />
       <Input
         type="search"
@@ -72,7 +72,11 @@ const Home = () => {
           <span className=" font-black">{totalResults}</span>
         </p>
       )}
-      {noResults ? <Error /> : <CardsList characters={characters} />}
+      {noResults ? (
+        <Error searchTermCharacters={searchTermCharacters} />
+      ) : (
+        <CardsList characters={characters} />
+      )}
       {totalPages && (
         <div className="flex gap-2 my-4 justify-center items-baseline">
           <Button
